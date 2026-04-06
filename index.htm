@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ГСК 98 | Концерты DAY 1</title>
+    <title>ГСК 98 | КОНЦЕРТ 31 МАЯ</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
         
         body {
@@ -19,6 +19,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 51, 102, 0.05) 0%, rgba(0,0,0,0.95) 90%);
         }
         
         .container {
@@ -30,363 +31,320 @@
         
         header {
             text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid #333;
+            padding: 30px 0 20px;
+            border-bottom: 1px solid rgba(255, 51, 102, 0.4);
             margin-bottom: 30px;
+            position: relative;
+        }
+        
+        header::after {
+            content: '🔥';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            opacity: 0.8;
+            animation: fireGlow 1.5s infinite alternate;
+        }
+        
+        @keyframes fireGlow {
+            0% { text-shadow: 0 0 2px #ff3366; opacity: 0.6; }
+            100% { text-shadow: 0 0 12px #ff9900; opacity: 1; }
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 10px;
-            color: #ff3366;
+            background: linear-gradient(135deg, #ff3366, #ff6633);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
         }
         
         .subtitle {
             font-size: 1.2rem;
             color: #ccc;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
         }
         
-        .concert-selection {
+        .subtitle:last-of-type {
+            color: #ffaa33;
+            font-weight: bold;
+        }
+        
+        /* Главная карточка концерта */
+        .featured-concert {
+            background: linear-gradient(145deg, #1a1a1a, #111111);
+            border-radius: 28px;
+            padding: 10px;
             margin-bottom: 30px;
+            border: 1px solid rgba(255, 51, 102, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(255, 51, 102, 0.2);
+            transition: transform 0.3s ease;
         }
         
-        .selection-options {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .selection-btn {
-            background-color: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 8px;
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-            color: #fff;
-            flex: 1;
-            min-width: 200px;
+        .concert-card {
+            background: #0f0f0f;
+            border-radius: 24px;
+            padding: 25px 20px;
             text-align: center;
-        }
-        
-        .selection-btn:hover {
-            background-color: #222;
-            border-color: #ff3366;
-        }
-        
-        .selection-btn.active {
-            background-color: #2a1a2a;
-            border-color: #ff3366;
-            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
-        }
-        
-        .concerts {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .concert-option {
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
             position: relative;
+            overflow: hidden;
         }
         
-        .concert-option:hover {
-            background-color: #222;
-            border-color: #ff3366;
-            transform: translateY(-2px);
+        .concert-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,51,102,0.15) 0%, rgba(0,0,0,0) 70%);
+            animation: rotateGlow 12s linear infinite;
+            pointer-events: none;
         }
         
-        .concert-option.selected {
-            background-color: #2a1a2a;
-            border-color: #ff3366;
-            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .concert-date {
-            font-size: 1.5rem;
+            font-size: 2.8rem;
+            font-weight: 800;
             color: #ff3366;
+            text-shadow: 0 0 10px rgba(255,51,102,0.5);
             margin-bottom: 10px;
+            letter-spacing: 3px;
         }
         
         .concert-time {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffaa66;
+            font-weight: 500;
         }
         
         .concert-level {
             display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 8px 24px;
+            border-radius: 40px;
             font-weight: bold;
-            margin-top: 10px;
-        }
-        
-        .level-medium {
-            background-color: #ff9900;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin: 15px 0;
+            background: linear-gradient(95deg, #ff3366, #ff9900);
             color: #000;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.6);
+            animation: pulseLevel 1.8s infinite;
         }
         
-        .level-low {
-            background-color: #00cc66;
-            color: #000;
-        }
-        
-        .level-high {
-            background-color: #ff3366;
-            color: #fff;
-        }
-        
-        .level-mega-high {
-            background: linear-gradient(45deg, #ff3366, #ff9900, #ff3366);
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-            animation: firePulse 2s infinite;
-        }
-        
-        @keyframes firePulse {
-            0% { box-shadow: 0 0 5px #ff3366; }
-            50% { box-shadow: 0 0 20px #ff9900, 0 0 30px #ff3366; }
-            100% { box-shadow: 0 0 5px #ff3366; }
+        @keyframes pulseLevel {
+            0% { transform: scale(1); box-shadow: 0 0 5px #ff3366; }
+            50% { transform: scale(1.03); box-shadow: 0 0 25px #ff9900; }
+            100% { transform: scale(1); box-shadow: 0 0 5px #ff3366; }
         }
         
         .fire-effect {
             position: absolute;
-            top: -10px;
-            right: 10px;
-            font-size: 1.5rem;
-            opacity: 0.7;
-            animation: fireMove 1.5s infinite alternate;
+            top: 5px;
+            right: 20px;
+            font-size: 2.2rem;
+            opacity: 0.9;
+            animation: fireMove 1.2s infinite alternate;
+            pointer-events: none;
         }
         
         @keyframes fireMove {
-            0% { transform: translateY(0) scale(1); opacity: 0.7; }
-            100% { transform: translateY(-5px) scale(1.1); opacity: 1; }
+            0% { transform: translateY(0) scale(1); opacity: 0.8; text-shadow: 0 0 2px orange; }
+            100% { transform: translateY(-6px) scale(1.1); opacity: 1; text-shadow: 0 0 15px red; }
         }
         
-        .concert-details {
-            background-color: #1a1a1a;
-            border-radius: 8px;
-            padding: 30px;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .concert-details.active {
-            display: block;
-        }
-        
-        .concert-info {
-            margin-bottom: 20px;
-        }
-        
-        .concert-info p {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-        
-        .selected-concerts-list {
+        .concert-info-panel {
+            background: #141414;
+            border-radius: 20px;
+            padding: 20px;
             margin: 20px 0;
-            padding: 15px;
-            background-color: #222;
-            border-radius: 5px;
-            display: none;
+            border-left: 4px solid #ff3366;
         }
         
-        .selected-concerts-list.active {
-            display: block;
+        .concert-info-panel p {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
         
-        .selected-concerts-list ul {
-            list-style-type: none;
-        }
-        
-        .selected-concerts-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #333;
-        }
-        
-        .selected-concerts-list li:last-child {
-            border-bottom: none;
+        .info-icon {
+            font-size: 1.3rem;
         }
         
         .ticket-section {
             text-align: center;
-            padding: 20px 0;
-            border-top: 1px solid #333;
-            margin-top: 20px;
+            padding: 15px 0 20px;
+            margin-top: 10px;
         }
         
         .ticket-price {
-            font-size: 1.8rem;
-            color: #00cc66;
-            margin: 20px 0;
+            font-size: 1.6rem;
+            color: #00ffaa;
+            background: rgba(0, 255, 170, 0.1);
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
         }
         
         .get-ticket-btn {
-            background-color: #ff3366;
+            background: linear-gradient(95deg, #ff3366, #ff6633);
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 30px;
+            padding: 16px 48px;
+            font-size: 1.3rem;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             font-weight: bold;
-            margin: 20px 0;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 20px rgba(255, 51, 102, 0.4);
         }
         
         .get-ticket-btn:hover {
-            background-color: #ff0044;
             transform: scale(1.05);
+            background: linear-gradient(95deg, #ff2255, #ff5515);
+            box-shadow: 0 8px 28px rgba(255, 51, 102, 0.7);
         }
         
         .get-ticket-btn:disabled {
-            background-color: #666;
-            cursor: not-allowed;
+            background: #444;
+            box-shadow: none;
             transform: none;
+            cursor: not-allowed;
         }
         
+        /* Блок билета */
         .ticket-code-section {
-            display: none;
-            background-color: #1a2a1a;
-            border-radius: 8px;
-            padding: 30px;
-            margin-top: 20px;
+            background: linear-gradient(135deg, #112211, #0a1a0a);
+            border-radius: 28px;
+            padding: 30px 25px;
+            margin-top: 25px;
             text-align: center;
+            border: 1px solid #00ff99;
+            box-shadow: 0 0 25px rgba(0, 255, 153, 0.2);
+            display: none;
         }
         
         .ticket-code-section.active {
             display: block;
-            animation: fadeIn 0.5s;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .ticket-code-section h2 {
+            color: #00ff99;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
         }
         
         .ticket-code {
-            font-family: monospace;
-            font-size: 1.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.9rem;
             letter-spacing: 3px;
-            background-color: #000;
-            padding: 15px;
-            border-radius: 5px;
+            background: #000000cc;
+            padding: 18px;
+            border-radius: 16px;
             margin: 20px 0;
-            color: #00ff99;
+            color: #00ffcc;
             border: 1px dashed #00ff99;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
+            transition: 0.2s;
             user-select: all;
+            font-weight: bold;
+            word-break: break-all;
         }
         
         .ticket-code:hover {
-            background-color: #111;
-            transform: scale(1.02);
-        }
-        
-        .ticket-code.copied {
-            background-color: #1a331a;
-            border-color: #00ff99;
-            color: #00ff99;
-        }
-        
-        .ticket-code::after {
-            content: 'Нажмите, чтобы скопировать';
-            position: absolute;
-            bottom: -25px;
-            left: 0;
-            right: 0;
-            font-size: 0.8rem;
-            color: #aaa;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .ticket-code:hover::after {
-            opacity: 1;
-        }
-        
-        .multiple-tickets {
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .multiple-tickets.active {
-            display: block;
-        }
-        
-        .ticket-list {
-            margin: 20px 0;
-        }
-        
-        .ticket-item {
-            background-color: #111;
-            border: 1px solid #333;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-        
-        .ticket-concert {
-            font-weight: bold;
-            color: #ff3366;
-            margin-bottom: 5px;
-        }
-        
-        .ticket-item .ticket-code {
-            font-size: 1.2rem;
-            margin: 10px 0;
-            padding: 10px;
+            background: #111;
+            transform: scale(1.01);
+            border-color: #ff3366;
         }
         
         .ticket-instructions {
-            margin: 20px 0;
-            line-height: 1.8;
-            color: #ccc;
+            margin: 25px 0 15px;
+            line-height: 1.7;
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 20px;
         }
         
         .form-link {
             display: inline-block;
-            background-color: #3366ff;
+            background: #3366ff;
             color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
+            padding: 12px 28px;
+            border-radius: 40px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 15px;
-            transition: all 0.3s;
+            margin: 15px 0 5px;
+            transition: 0.2s;
         }
         
         .form-link:hover {
-            background-color: #2255dd;
+            background: #2255dd;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(51,102,255,0.4);
         }
         
+        .disappear-notice {
+            margin-top: 18px;
+            font-size: 0.85rem;
+            color: #ffaa66;
+            background: rgba(0,0,0,0.6);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 30px;
+        }
+        
+        /* Уведомление */
         .copy-notification {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.96);
             border: 2px solid #00ff99;
-            border-radius: 10px;
-            padding: 30px;
-            z-index: 1000;
+            border-radius: 28px;
+            padding: 30px 35px;
+            z-index: 2000;
             text-align: center;
-            max-width: 500px;
+            max-width: 480px;
             width: 90%;
             display: none;
-            animation: fadeIn 0.3s;
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 60px rgba(0, 255, 153, 0.4);
+            animation: fadeInScale 0.2s ease;
+        }
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.95);}
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1);}
         }
         
         .copy-notification.active {
@@ -394,541 +352,304 @@
         }
         
         .notification-title {
-            font-size: 1.8rem;
-            color: #00ff99;
-            margin-bottom: 20px;
-        }
-        
-        .notification-text {
-            font-size: 1.2rem;
+            font-size: 2rem;
+            color: #ff3366;
             margin-bottom: 15px;
-            color: #fff;
-        }
-        
-        .notification-link {
-            color: #3366ff;
             font-weight: bold;
-            text-decoration: none;
-        }
-        
-        .notification-link:hover {
-            text-decoration: underline;
         }
         
         .timer {
-            font-size: 1.5rem;
-            color: #ff3366;
-            margin-top: 20px;
+            font-size: 2.8rem;
             font-weight: bold;
-        }
-        
-        .disappear-notice {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #ff9900;
-            font-style: italic;
+            color: #00ff99;
+            margin: 20px 0 10px;
+            font-family: monospace;
         }
         
         footer {
             text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid #333;
-            margin-top: 30px;
+            padding: 35px 0 20px;
+            border-top: 1px solid #222;
+            margin-top: 40px;
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .concert-date {
-                font-size: 1.3rem;
-            }
-            
-            .ticket-code {
-                font-size: 1.4rem;
-                letter-spacing: 2px;
-                overflow-x: auto;
-            }
-            
-            .notification-title {
-                font-size: 1.5rem;
-            }
-            
-            .notification-text {
-                font-size: 1rem;
-            }
-            
-            .selection-options {
-                flex-direction: column;
-            }
-            
-            .selection-btn {
-                min-width: 100%;
-            }
+        @media (max-width: 640px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2.2rem; }
+            .concert-date { font-size: 2rem; }
+            .ticket-code { font-size: 1.2rem; letter-spacing: 1px; }
+            .get-ticket-btn { padding: 12px 28px; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>ГСК 98</h1>
-            <div class="subtitle">DAY 1 - КОНЦЕРТЫ</div>
-            <div class="subtitle">Бесплатные билеты</div>
-        </header>
-        
-        <section class="concert-selection">
-            <h2>ВЫБЕРИТЕ РЕЖИМ ПОКУПКИ:</h2>
-            <div class="selection-options">
-                <button class="selection-btn" id="singleConcertBtn" data-mode="single">
-                    БИЛЕТ НА ОДИН КОНЦЕРТ
-                </button>
-                <button class="selection-btn" id="allConcertsBtn" data-mode="all">
-                    БИЛЕТЫ НА ВСЕ КОНЦЕРТЫ
-                </button>
+<div class="container">
+    <header>
+        <h1>ГСК 98</h1>
+        <div class="subtitle">DAY 1 — ЭКСКЛЮЗИВНЫЙ КОНЦЕРТ</div>
+        <div class="subtitle">ВХОД ПО БЕСПЛАТНОМУ БИЛЕТУ</div>
+    </header>
+
+    <!-- Единственный концерт 31 мая -->
+    <div class="featured-concert">
+        <div class="concert-card">
+            <div class="fire-effect">🔥🔥🔥</div>
+            <div class="concert-date">31 МАЯ</div>
+            <div class="concert-time">START: 19:00 / OPEN: 18:00</div>
+            <div class="concert-level">МЕГА ВЫСОКИЙ 🔥 MEGA LEVEL</div>
+            <div class="concert-info-panel">
+                <p><span class="info-icon">📍</span> Место: ГСК 98, MAIN STAGE</p>
+                <p><span class="info-icon">🎤</span> Хедлайнер: Группа "-" (специальный сет)</p>
+                <p><span class="info-icon">⚡</span> Лимитированные бесплатные билеты</p>
+                <p><span class="info-icon">🎟️</span> Обязателен уникальный код для входа</p>
             </div>
-        </section>
-        
-        <section>
-            <h2 id="concertTitle">ВЫБЕРИТЕ КОНЦЕРТ:</h2>
-            <div class="concerts">
-                <div class="concert-option" data-date="27 МАЯ" data-time="15:00" data-level="СРЕДНИЙ" data-level-class="level-medium">
-                    <div class="concert-date">27 МАЯ</div>
-                    <div class="concert-time">15:00</div>
-                    <div class="concert-level level-medium">СРЕДНИЙ</div>
-                </div>
-                
-                <div class="concert-option" data-date="28 МАЯ" data-time="15:00" data-level="НИЗКИЙ" data-level-class="level-low">
-                    <div class="concert-date">28 МАЯ</div>
-                    <div class="concert-time">15:00</div>
-                    <div class="concert-level level-low">НИЗКИЙ</div>
-                </div>
-                
-                <div class="concert-option" data-date="29 МАЯ" data-time="15:00" data-level="ВЫСОКИЙ" data-level-class="level-high">
-                    <div class="concert-date">29 МАЯ</div>
-                    <div class="concert-time">15:00</div>
-                    <div class="concert-level level-high">ВЫСОКИЙ</div>
-                </div>
-                
-                <div class="concert-option" data-date="30 МАЯ" data-time="15:00" data-level="ВЫСОКИЙ+МЕГА ВЫСОКИЙ" data-level-class="level-mega-high">
-                    <div class="concert-date">30 МАЯ</div>
-                    <div class="concert-time">15:00</div>
-                    <div class="concert-level level-mega-high">ВЫСОКИЙ+МЕГА ВЫСОКИЙ</div>
-                    <div class="fire-effect">🔥</div>
-                </div>
-            </div>
-            
-            <div class="selected-concerts-list" id="selectedConcertsList">
-                <h3>Выбранные концерты:</h3>
-                <ul id="selectedConcertsUl"></ul>
-            </div>
-        </section>
-        
-        <div class="concert-details" id="concertDetails">
-            <div class="concert-info">
-                <p><strong>Место:</strong> ГСК 98</p>
-                <p><strong>Хедлайнер:</strong> Группа "-"</p>
-                <p><strong>Билет обязателен для входа</strong></p>
-            </div>
-            
             <div class="ticket-section">
                 <div class="ticket-price">СТОИМОСТЬ: 0 РУБЛЕЙ</div>
                 <button class="get-ticket-btn" id="getTicketBtn">ПОЛУЧИТЬ БИЛЕТ</button>
             </div>
         </div>
-        
-        <div class="ticket-code-section" id="ticketCodeSection">
-            <h2 id="ticketTitle">ВАШ БИЛЕТ УСПЕШНО ОФОРМЛЕН!</h2>
-            
-            <div id="singleTicket">
-                <p>Ваш уникальный код билета (нажмите для копирования):</p>
-                <div class="ticket-code" id="ticketCode">EXDSE2026854PEST</div>
-            </div>
-            
-            <div class="multiple-tickets" id="multipleTickets">
-                <p>Ваши уникальные коды билетов:</p>
-                <div class="ticket-list" id="ticketList">
-                    <!-- Билеты будут добавлены сюда динамически -->
-                </div>
-            </div>
-            
-            <div class="ticket-instructions">
-                <p>После копирования кодов перейдите по ссылке ниже и заполните форму:</p>
-                <a href="https://forms.gle/ynTu18vj4L7Rwqaz6" target="_blank" class="form-link">ПЕРЕЙТИ К ФОРМЕ</a>
-                <p class="disappear-notice">После получения кодов выше появится уведомление на 10 секунд</p>
-                <p style="margin-top: 15px; font-size: 0.9rem; color: #aaa;">Каждый код действителен только для указанного концерта.</p>
-            </div>
+    </div>
+
+    <!-- Блок с полученным билетом -->
+    <div class="ticket-code-section" id="ticketCodeSection">
+        <h2>✨ ВАШ БИЛЕТ ГОТОВ ✨</h2>
+        <div id="singleTicket">
+            <p>Уникальный код (нажмите для копирования):</p>
+            <div class="ticket-code" id="ticketCode">GSC31MEGA2026</div>
+        </div>
+        <div class="ticket-instructions">
+            <p>✔ Скопируйте код и перейдите по ссылке ниже для подтверждения регистрации:</p>
+            <a href="https://forms.gle/ynTu18vj4L7Rwqaz6" target="_blank" class="form-link">📋 ПЕРЕЙТИ К ФОРМЕ</a>
+            <p class="disappear-notice">⚠️ После получения кода появится уведомление на 10 секунд — сохраните код!</p>
+            <p style="margin-top: 12px; font-size: 0.85rem;">Код действителен только для концерта 31 мая. Предъявите на входе.</p>
         </div>
     </div>
-    
-    <div class="copy-notification" id="copyNotification">
-        <div class="notification-title">ВАЖНО!</div>
-        <div class="notification-text">ОБЯЗАТЕЛЬНО СКОПИРУЙТЕ И СОХРАНИТЕ КОДЫ</div>
-        <div class="notification-text">И ПЕРЕЙДИТЕ ПО ССЫЛКЕ НА ФОРМУ:</div>
-        <a href="https://forms.gle/ynTu18vj4L7Rwqaz6" target="_blank" class="notification-link">https://forms.gle/ynTu18vj4L7Rwqaz6</a>
-        <div class="timer" id="notificationTimer">10</div>
-        <div class="disappear-notice">Сообщение исчезнет через <span id="countdown">10</span> секунд</div>
-    </div>
-    
-    <footer>
-        <p>© 2026 ГСК 98 | Официальный сайт</p>
-    </footer>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const concertOptions = document.querySelectorAll('.concert-option');
-            const concertDetails = document.getElementById('concertDetails');
-            const getTicketBtn = document.getElementById('getTicketBtn');
-            const ticketCodeSection = document.getElementById('ticketCodeSection');
-            const ticketCodeElement = document.getElementById('ticketCode');
-            const copyNotification = document.getElementById('copyNotification');
-            const notificationTimer = document.getElementById('notificationTimer');
-            const countdownElement = document.getElementById('countdown');
-            const singleTicketSection = document.getElementById('singleTicket');
-            const multipleTicketsSection = document.getElementById('multipleTickets');
-            const ticketList = document.getElementById('ticketList');
-            const selectedConcertsList = document.getElementById('selectedConcertsList');
-            const selectedConcertsUl = document.getElementById('selectedConcertsUl');
-            const concertTitle = document.getElementById('concertTitle');
-            const ticketTitle = document.getElementById('ticketTitle');
-            const singleConcertBtn = document.getElementById('singleConcertBtn');
-            const allConcertsBtn = document.getElementById('allConcertsBtn');
+<div class="copy-notification" id="copyNotification">
+    <div class="notification-title">🔔 СОХРАНИТЕ КОД!</div>
+    <div class="notification-text">Обязательно скопируйте ваш билетный код:</div>
+    <div class="timer" id="notificationTimer">10</div>
+    <div class="notification-text" style="margin-top: 8px;">Затем заполните форму по ссылке:</div>
+    <a href="https://forms.gle/ynTu18vj4L7Rwqaz6" target="_blank" style="color:#66ffcc; font-weight:bold;">forms.gle/ynTu18vj4L7Rwqaz6</a>
+    <div class="disappear-notice" style="margin-top: 18px;">Уведомление исчезнет через <span id="countdown">10</span> сек</div>
+</div>
+
+<footer>
+    <p>© 2026 ГСК 98 | Официальный билетный сервис | Концерт 31 мая</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // === Единственный концерт: 31 мая, только один билет, нет режимов выбора ===
+        const getTicketBtn = document.getElementById('getTicketBtn');
+        const ticketCodeSection = document.getElementById('ticketCodeSection');
+        const ticketCodeElement = document.getElementById('ticketCode');
+        const copyNotification = document.getElementById('copyNotification');
+        const notificationTimerSpan = document.getElementById('notificationTimer');
+        const countdownSpan = document.getElementById('countdown');
+        
+        let countdownInterval = null;
+        let secondsLeft = 10;
+        
+        // Генерация уникального кода для 31 мая (стилизованный, но рандомизированный)
+        function generateMay31TicketCode() {
+            const prefix = "GSC31";
+            const suffix = "MEGA";
+            const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();
+            const numPart = Math.floor(Math.random() * 9000 + 1000);
+            // формат: GSC31 + 4случбуквы + цифры + MEGA
+            return `${prefix}${randomPart}${numPart}${suffix}`;
+        }
+        
+        // Функция копирования текста
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (err) {
+                console.error('Ошибка копирования: ', err);
+                // fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                return true;
+            }
+        }
+        
+        // Показать уведомление с таймером
+        function showCopyNotification() {
+            secondsLeft = 10;
+            notificationTimerSpan.textContent = secondsLeft;
+            if(countdownSpan) countdownSpan.textContent = secondsLeft;
+            copyNotification.classList.add('active');
             
-            let selectedConcert = null;
-            let selectedConcerts = [];
-            let purchaseMode = 'single'; // 'single' или 'all'
-            let countdownInterval = null;
-            let secondsLeft = 10;
-            
-            // Инициализация режима покупки
-            function initPurchaseMode() {
-                // Сбрасываем выбор концертов
-                concertOptions.forEach(opt => opt.classList.remove('selected'));
-                selectedConcert = null;
-                selectedConcerts = [];
+            if (countdownInterval) clearInterval(countdownInterval);
+            countdownInterval = setInterval(function() {
+                secondsLeft--;
+                notificationTimerSpan.textContent = secondsLeft;
+                if(countdownSpan) countdownSpan.textContent = secondsLeft;
                 
-                if (purchaseMode === 'single') {
-                    concertTitle.textContent = 'ВЫБЕРИТЕ КОНЦЕРТ:';
-                    selectedConcertsList.classList.remove('active');
-                    getTicketBtn.disabled = true;
-                    concertDetails.classList.remove('active');
-                    ticketTitle.textContent = 'ВАШ БИЛЕТ УСПЕШНО ОФОРМЛЕН!';
-                    singleTicketSection.style.display = 'block';
-                    multipleTicketsSection.classList.remove('active');
-                } else {
-                    concertTitle.textContent = 'ВСЕ КОНЦЕРТЫ (автоматически выбраны):';
-                    selectedConcertsList.classList.add('active');
-                    
-                    // Автоматически выбираем все концерты
-                    selectedConcerts = [];
-                    concertOptions.forEach(option => {
-                        option.classList.add('selected');
-                        selectedConcerts.push({
-                            date: option.getAttribute('data-date'),
-                            time: option.getAttribute('data-time'),
-                            level: option.getAttribute('data-level'),
-                            levelClass: option.getAttribute('data-level-class')
-                        });
-                    });
-                    
-                    updateSelectedConcertsList();
-                    concertDetails.classList.add('active');
-                    getTicketBtn.disabled = false;
-                    ticketTitle.textContent = 'ВАШИ БИЛЕТЫ УСПЕШНО ОФОРМЛЕНЫ!';
-                    singleTicketSection.style.display = 'none';
-                    multipleTicketsSection.classList.add('active');
+                if (secondsLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    copyNotification.classList.remove('active');
                 }
-            }
-            
-            // Обновление списка выбранных концертов
-            function updateSelectedConcertsList() {
-                selectedConcertsUl.innerHTML = '';
-                
-                selectedConcerts.forEach(concert => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<strong>${concert.date}</strong> ${concert.time} - <span class="${concert.levelClass}">${concert.level}</span>`;
-                    selectedConcertsUl.appendChild(li);
-                });
-            }
-            
-            // Выбор режима покупки
-            singleConcertBtn.addEventListener('click', function() {
-                purchaseMode = 'single';
-                singleConcertBtn.classList.add('active');
-                allConcertsBtn.classList.remove('active');
-                initPurchaseMode();
-            });
-            
-            allConcertsBtn.addEventListener('click', function() {
-                purchaseMode = 'all';
-                allConcertsBtn.classList.add('active');
-                singleConcertBtn.classList.remove('active');
-                initPurchaseMode();
-            });
-            
-            // Выбор концерта (только для режима single)
-            concertOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    if (purchaseMode === 'all') return; // В режиме "все" выбор отключен
-                    
-                    // Убираем выделение со всех вариантов
-                    concertOptions.forEach(opt => opt.classList.remove('selected'));
-                    
-                    // Выделяем выбранный вариант
-                    this.classList.add('selected');
-                    
-                    // Сохраняем выбранный концерт
-                    selectedConcert = {
-                        date: this.getAttribute('data-date'),
-                        time: this.getAttribute('data-time'),
-                        level: this.getAttribute('data-level'),
-                        levelClass: this.getAttribute('data-level-class')
-                    };
-                    
-                    // Показываем детали концерта
-                    concertDetails.classList.add('active');
-                    
-                    // Активируем кнопку получения билета
-                    getTicketBtn.disabled = false;
-                });
-            });
-            
-            // Генерация уникального кода билета
-            function generateTicketCode() {
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-                const datePart = new Date().getFullYear().toString().substr(-2) + 
-                                (new Date().getMonth() + 1).toString().padStart(2, '0') + 
-                                new Date().getDate().toString().padStart(2, '0');
-                
-                let code = '';
-                
-                // Первые 4 символа - буквы
-                for (let i = 0; i < 4; i++) {
-                    code += chars.charAt(Math.floor(Math.random() * 26));
-                }
-                
-                // Добавляем дату
-                code += datePart;
-                
-                // Добавляем случайные символы
-                for (let i = 0; i < 5; i++) {
-                    code += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                
-                return code;
-            }
-            
-            // Функция копирования кода в буфер обмена
-            function copyCodeToClipboard(code) {
-                navigator.clipboard.writeText(code).then(function() {
-                    // Показываем визуальную обратную связь
-                    const activeCode = document.querySelector('.ticket-item .ticket-code.copied');
-                    if (activeCode) {
-                        activeCode.classList.remove('copied');
-                    }
-                    
-                    // Показываем уведомление по центру экрана
-                    showCopyNotification();
-                }).catch(function(err) {
-                    console.error('Ошибка копирования: ', err);
-                    alert('Не удалось скопировать код. Пожалуйста, скопируйте его вручную: ' + code);
-                });
-            }
-            
-            // Показать уведомление о копировании
-            function showCopyNotification() {
-                secondsLeft = 10;
-                notificationTimer.textContent = secondsLeft;
-                countdownElement.textContent = secondsLeft;
-                copyNotification.classList.add('active');
-                
-                // Запускаем таймер
-                clearInterval(countdownInterval);
-                countdownInterval = setInterval(function() {
-                    secondsLeft--;
-                    notificationTimer.textContent = secondsLeft;
-                    countdownElement.textContent = secondsLeft;
-                    
-                    if (secondsLeft <= 0) {
-                        clearInterval(countdownInterval);
-                        copyNotification.classList.remove('active');
-                    }
-                }, 1000);
-            }
-            
-            // Обработчик клика по коду для копирования
-            function setupCodeCopyListeners() {
-                document.querySelectorAll('.ticket-code').forEach(codeElement => {
-                    codeElement.addEventListener('click', function() {
-                        const code = this.textContent;
-                        if (code && code.length > 5 && !code.includes("СКОПИРОВАНО")) {
-                            // Визуальная обратная связь для отдельного кода
-                            if (!this.classList.contains('ticket-item')) {
-                                this.classList.add('copied');
-                                const originalText = this.textContent;
-                                this.textContent = "✓ СКОПИРОВАНО!";
-                                
-                                setTimeout(function() {
-                                    this.classList.remove('copied');
-                                    this.textContent = originalText;
-                                }.bind(this), 1500);
-                            }
-                            
-                            copyCodeToClipboard(code);
+            }, 1000);
+        }
+        
+        // Визуальный эффект копирования для кода
+        function animateCodeCopy(element, originalCode) {
+            const originalText = element.textContent;
+            element.classList.add('copied');
+            element.textContent = "✓ КОД СКОПИРОВАН!";
+            element.style.transition = "0.2s";
+            setTimeout(() => {
+                element.textContent = originalCode;
+                element.classList.remove('copied');
+            }, 1500);
+        }
+        
+        // Обработчик клика по коду (копирование)
+        function setupCodeCopy() {
+            if (ticketCodeElement) {
+                // Удаляем старые обработчики, чтобы не дублировать
+                const newCodeElement = ticketCodeElement.cloneNode(true);
+                ticketCodeElement.parentNode.replaceChild(newCodeElement, ticketCodeElement);
+                window.ticketCodeElement = newCodeElement;
+                newCodeElement.addEventListener('click', async function(e) {
+                    e.stopPropagation();
+                    const code = this.textContent.trim();
+                    if (code && !code.includes("СКОПИРОВАН") && code.length > 5) {
+                        const success = await copyToClipboard(code);
+                        if (success) {
+                            animateCodeCopy(this, code);
+                            showCopyNotification();
+                        } else {
+                            alert('Не удалось скопировать. Скопируйте вручную: ' + code);
                         }
-                    });
-                });
-            }
-            
-            // Получение билета
-            getTicketBtn.addEventListener('click', function() {
-                if (purchaseMode === 'single' && !selectedConcert) {
-                    alert('Пожалуйста, выберите концерт сначала!');
-                    return;
-                }
-                
-                if (purchaseMode === 'all') {
-                    // Генерируем коды для всех концертов
-                    const tickets = [];
-                    selectedConcerts.forEach(concert => {
-                        const ticketCode = generateTicketCode();
-                        tickets.push({
-                            concert: concert,
-                            code: ticketCode
-                        });
-                    });
-                    
-                    // Отображаем все билеты
-                    displayMultipleTickets(tickets);
-                    
-                    // Сохраняем данные в localStorage
-                    const ticketData = {
-                        mode: 'all',
-                        tickets: tickets,
-                        issued: new Date().toISOString()
-                    };
-                    
-                    localStorage.setItem('gsk98_tickets', JSON.stringify(ticketData));
-                    console.log('Билеты оформлены:', ticketData);
-                    
-                } else {
-                    // Генерируем код для одного концерта
-                    const ticketCode = generateTicketCode();
-                    
-                    // Показываем код билета
-                    ticketCodeElement.textContent = ticketCode;
-                    concertDetails.classList.remove('active');
-                    ticketCodeSection.classList.add('active');
-                    
-                    // Сохраняем данные в localStorage
-                    const ticketData = {
-                        mode: 'single',
-                        concert: selectedConcert,
-                        code: ticketCode,
-                        issued: new Date().toISOString()
-                    };
-                    
-                    localStorage.setItem('gsk98_ticket', JSON.stringify(ticketData));
-                    console.log('Билет оформлен:', ticketData);
-                }
-                
-                // Прокручиваем к билетам
-                ticketCodeSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Настраиваем обработчики копирования
-                setTimeout(setupCodeCopyListeners, 100);
-                
-                // Автоматически показываем уведомление
-                setTimeout(function() {
-                    showCopyNotification();
-                }, 500);
-            });
-            
-            // Отображение нескольких билетов
-            function displayMultipleTickets(tickets) {
-                ticketList.innerHTML = '';
-                
-                tickets.forEach((ticket, index) => {
-                    const ticketItem = document.createElement('div');
-                    ticketItem.className = 'ticket-item';
-                    ticketItem.innerHTML = `
-                        <div class="ticket-concert">${ticket.concert.date} ${ticket.concert.time} - ${ticket.concert.level}</div>
-                        <div class="ticket-code">${ticket.code}</div>
-                        <div style="font-size: 0.9rem; color: #aaa;">(нажмите, чтобы скопировать)</div>
-                    `;
-                    ticketList.appendChild(ticketItem);
-                });
-                
-                concertDetails.classList.remove('active');
-                ticketCodeSection.classList.add('active');
-            }
-            
-            // Инициализация при загрузке
-            function init() {
-                // По умолчанию выбираем режим "один концерт"
-                singleConcertBtn.classList.add('active');
-                purchaseMode = 'single';
-                
-                // Проверяем, есть ли уже сохраненные билеты
-                const savedTicket = localStorage.getItem('gsk98_ticket');
-                const savedTickets = localStorage.getItem('gsk98_tickets');
-                
-                if (savedTickets) {
-                    const ticketData = JSON.parse(savedTickets);
-                    
-                    if (ticketData.mode === 'all') {
-                        // Переключаемся в режим "все концерты"
-                        purchaseMode = 'all';
-                        allConcertsBtn.click();
-                        
-                        // Восстанавливаем билеты
-                        displayMultipleTickets(ticketData.tickets);
                     }
-                } else if (savedTicket) {
-                    const ticketData = JSON.parse(savedTicket);
-                    
-                    if (ticketData.mode === 'single') {
-                        // Находим и выбираем соответствующий концерт
-                        concertOptions.forEach(option => {
-                            if (option.getAttribute('data-date') === ticketData.concert.date) {
-                                option.click();
-                            }
-                        });
-                        
-                        // Показываем код билета
-                        ticketCodeElement.textContent = ticketData.code;
-                        concertDetails.classList.remove('active');
+                });
+                document.getElementById('ticketCode') === null && (document.getElementById('ticketCode') && (()=>{}));
+            }
+        }
+        
+        // Проверка и восстановление билета из localStorage
+        function restoreTicketIfExists() {
+            const savedTicketData = localStorage.getItem('gsk98_may31_ticket');
+            if (savedTicketData) {
+                try {
+                    const ticket = JSON.parse(savedTicketData);
+                    if (ticket && ticket.code && ticket.date === '31 МАЯ') {
+                        // Показываем секцию с билетом, скрываем кнопку получения? но лучше показать билет, но дать возможность получить новый? 
+                        // По концепции: можно повторно показать тот же билет (но не генерировать новый, чтобы не плодить)
+                        ticketCodeElement.textContent = ticket.code;
                         ticketCodeSection.classList.add('active');
+                        getTicketBtn.style.display = 'none'; // скрываем кнопку, билет уже получен
+                        setupCodeCopy();
+                        return true;
                     }
-                }
-                
-                // Настраиваем обработчики копирования
-                setupCodeCopyListeners();
+                } catch(e) { console.warn(e); }
             }
+            return false;
+        }
+        
+        // Получение билета
+        function issueNewTicket() {
+            const newCode = generateMay31TicketCode();
+            // сохраняем в localStorage
+            const ticketInfo = {
+                date: '31 МАЯ',
+                code: newCode,
+                issuedAt: new Date().toISOString(),
+                concertLevel: 'MEGA HIGH'
+            };
+            localStorage.setItem('gsk98_may31_ticket', JSON.stringify(ticketInfo));
             
-            // Изначально деактивируем кнопку получения билета
-            getTicketBtn.disabled = true;
+            // отображаем код
+            ticketCodeElement.textContent = newCode;
+            ticketCodeSection.classList.add('active');
             
-            // Запускаем инициализацию
-            init();
+            // Скрываем кнопку получения билета, чтобы не выдавалось несколько билетов (логично: один человек - один билет)
+            getTicketBtn.style.display = 'none';
             
-            // Закрытие уведомления по клику
-            copyNotification.addEventListener('click', function() {
-                clearInterval(countdownInterval);
-                this.classList.remove('active');
-            });
+            // настраиваем копирование
+            setupCodeCopy();
+            
+            // прокрутка к билету
+            ticketCodeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // маленькая задержка для показа уведомления
+            setTimeout(() => {
+                showCopyNotification();
+            }, 300);
+            
+            console.log('Билет на 31 мая успешно выдан:', ticketInfo);
+        }
+        
+        // Обработчик нажатия кнопки ПОЛУЧИТЬ БИЛЕТ
+        getTicketBtn.addEventListener('click', function() {
+            // Проверяем, не получен ли уже билет (если кнопка скрыта - то билет есть)
+            if (getTicketBtn.style.display === 'none') {
+                // Если по какой-то причине кнопка скрыта но пытаются кликнуть (защита)
+                return;
+            }
+            // дополнительно проверяем наличие билета в localStorage, чтобы не генерить повторно
+            const existing = localStorage.getItem('gsk98_may31_ticket');
+            if (existing) {
+                try {
+                    const parsed = JSON.parse(existing);
+                    if (parsed && parsed.code) {
+                        // Показываем существующий билет
+                        ticketCodeElement.textContent = parsed.code;
+                        ticketCodeSection.classList.add('active');
+                        getTicketBtn.style.display = 'none';
+                        setupCodeCopy();
+                        ticketCodeSection.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => showCopyNotification(), 300);
+                        return;
+                    }
+                } catch(e) {}
+            }
+            // иначе выдать новый
+            issueNewTicket();
         });
-    </script>
+        
+        // инициализация: если уже есть билет, показываем его и прячем кнопку
+        const isRestored = restoreTicketIfExists();
+        if (!isRestored) {
+            // кнопка активна, билета нет в localStorage
+            getTicketBtn.disabled = false;
+            getTicketBtn.style.display = 'inline-block';
+        } else {
+            getTicketBtn.style.display = 'none';
+        }
+        
+        // Дополнительно: обработчик для закрытия уведомления по клику на фон (но не обязательно)
+        copyNotification.addEventListener('click', function(e) {
+            if (e.target === copyNotification || e.target.classList?.contains('copy-notification')) {
+                if (countdownInterval) clearInterval(countdownInterval);
+                copyNotification.classList.remove('active');
+            }
+        });
+        
+        // инициализация копирования если билет уже показан
+        if (ticketCodeSection.classList.contains('active')) {
+            setupCodeCopy();
+        }
+        
+        // Обработка на случай, если форма билета уже видна, но копирование не сработало
+        if (ticketCodeElement) {
+            // дополнительная гарантия
+            if (!ticketCodeElement.getAttribute('data-listener')) {
+                ticketCodeElement.setAttribute('data-listener', 'true');
+            }
+        }
+    });
+</script>
 </body>
 </html>
